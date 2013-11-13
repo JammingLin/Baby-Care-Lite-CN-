@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0A3104E7-1632-4FAA-9E6F-88A62DDECC83</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Amoy Baby Care</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>345B09A4-E292-44CA-AC64-801AD7B6058B</key>
+		<string>https://github.com/JammingLin/Baby-Care-Lite--CN-.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Parenting/Amoy Baby Care.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>345B09A4-E292-44CA-AC64-801AD7B6058B</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/JammingLin/AmoyCareCode.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>345B09A4-E292-44CA-AC64-801AD7B6058B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>345B09A4-E292-44CA-AC64-801AD7B6058B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Baby Care Lite (CN)</string>
+		</dict>
+	</array>
+</dict>
+</plist>
