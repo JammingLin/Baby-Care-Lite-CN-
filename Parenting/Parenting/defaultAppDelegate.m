@@ -16,7 +16,7 @@ NSUncaughtExceptionHandler* _uncaughtExceptionHandler = nil;
 void UncaughtExceptionHandler(NSException *exception) {
     NSLog(@"CRASH: %@", exception);
     NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
-    // 异常的堆栈信息
+    // 异常的堆栈信息  avitest
     NSArray *stackArray = [exception callStackSymbols];
     // 出现异常的原因
     NSString *reason = [exception reason];
