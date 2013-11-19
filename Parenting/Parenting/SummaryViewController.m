@@ -11,7 +11,6 @@
 
 #import "QuadCurveMenuItem.h"
 #import "CustumCell.h"
-#import  <ShareSDK/ShareSDK.h>
 #import "AdviseData.h"
 #import "AdviseTableViewCell.h"
 
