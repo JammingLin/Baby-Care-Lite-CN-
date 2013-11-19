@@ -83,7 +83,6 @@ void UncaughtExceptionHandler(NSException *exception) {
                                                    UIRemoteNotificationTypeAlert)];
     // Required
     [APService setupWithOption:launchOptions];
-    [UMSocialData setAppKey:UMENGAPPKEY];
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kAPNetworkDidReceiveMessageNotification object:nil];
@@ -120,6 +119,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     self.window.rootViewController  = TabbarController;
     
     //[ShareSDK registerApp:@"b0bf0698120"];
+    [UMSocialData setAppKey:UMENGAPPKEY];
     [self initializePlat];
     
 }

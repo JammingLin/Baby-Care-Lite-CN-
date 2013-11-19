@@ -8,7 +8,7 @@
 
 #import "SummaryViewController.h"
 #import "defaultAppDelegate.h"
-
+#import "UMSocial.h"
 #import "QuadCurveMenuItem.h"
 #import "CustumCell.h"
 #import "AdviseData.h"
@@ -151,35 +151,35 @@
 //    [button setImage:[UIImage imageNamed:@"icon_share.png"] forState:UIControlStateNormal];
 //    UIBarButtonItem *rtButton = [[UIBarButtonItem alloc] initWithCustomView:button];
 //    self.navigationItem.rightBarButtonItem = rtButton;
-    
-    Shareview=[[UIImageView alloc]initWithFrame:CGRectMake(20, -300+G_YADDONVERSION, 280, 300)];
-
-    
-    [Shareview setImage:[UIImage imageNamed:@"save_bg.png"]];
-    [Shareview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-    Shareview.userInteractionEnabled=YES;
-    UIImageView *Shareimage=[[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 260, 180)];
-    [Shareview addSubview:Shareimage];
-    Shareimage.tag=10001;
-    Shareimage.contentMode=UIViewContentModeScaleAspectFit;
-    Sharetext=[[UITextField alloc]initWithFrame:CGRectMake(10, 210, 260, 30)];
-    [Shareview addSubview:Sharetext];
-    Sharetext.tag=10002;
-    Sharetext.borderStyle=UITextBorderStyleRoundedRect;
-    
-    UIButton *share=[UIButton buttonWithType:UIButtonTypeCustom];
-    [share setTitle:NSLocalizedString(@"Share",nil) forState:UIControlStateNormal];
-    
-    share.frame=CGRectMake(155, 250, 100, 40);
-    [share setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
-    [share addTarget:self action:@selector(Share) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *cancle=[UIButton buttonWithType:UIButtonTypeCustom];
-    cancle.frame=CGRectMake(15, 250, 100, 40);
-    [cancle setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
-    [cancle addTarget:self action:@selector(hidenshareview) forControlEvents:UIControlEventTouchUpInside];
-    [cancle setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
-    [Shareview addSubview:share];
-    [Shareview addSubview:cancle];
+//    
+//    Shareview=[[UIImageView alloc]initWithFrame:CGRectMake(20, -300+G_YADDONVERSION, 280, 300)];
+//
+//    
+//    [Shareview setImage:[UIImage imageNamed:@"save_bg.png"]];
+//    [Shareview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+//    Shareview.userInteractionEnabled=YES;
+//    UIImageView *Shareimage=[[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 260, 180)];
+//    [Shareview addSubview:Shareimage];
+//    Shareimage.tag=10001;
+//    Shareimage.contentMode=UIViewContentModeScaleAspectFit;
+//    Sharetext=[[UITextField alloc]initWithFrame:CGRectMake(10, 210, 260, 30)];
+//    [Shareview addSubview:Sharetext];
+//    Sharetext.tag=10002;
+//    Sharetext.borderStyle=UITextBorderStyleRoundedRect;
+//    
+//    UIButton *share=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [share setTitle:NSLocalizedString(@"Share",nil) forState:UIControlStateNormal];
+//    
+//    share.frame=CGRectMake(155, 250, 100, 40);
+//    [share setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
+//    [share addTarget:self action:@selector(Share) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *cancle=[UIButton buttonWithType:UIButtonTypeCustom];
+//    cancle.frame=CGRectMake(15, 250, 100, 40);
+//    [cancle setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
+//    [cancle addTarget:self action:@selector(hidenshareview) forControlEvents:UIControlEventTouchUpInside];
+//    [cancle setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
+//    [Shareview addSubview:share];
+//    [Shareview addSubview:cancle];
     
     backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
     [backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
@@ -240,7 +240,7 @@
 - (void)ShareBtn{
     
     [self hidenshareview];
-//    UIView *view = [[[[[UIApplication sharedApplication] windows] objectAtIndex:0] subviews] lastObject];//获得某个window的某个subView
+    UIView *view = [[[[[UIApplication sharedApplication] windows] objectAtIndex:0] subviews] lastObject];//获得某个window的某个subView
     UIGraphicsBeginImageContext(CGSizeMake(plotScrollView.frame.size.width, plotScrollView.frame.size.height - 65));
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *parentImage=UIGraphicsGetImageFromCurrentImageContext();
@@ -265,7 +265,7 @@
     [UIView commitAnimations];
     UIImageView *imageview=(UIImageView*)[Shareview viewWithTag:10001];
     imageview.image=image;
-//    [self showshareview];
+    [self showshareview];
     
     
     [self Share];
@@ -273,6 +273,13 @@
 -(void)Share
 {
 
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:UMENGAPPKEY
+                                      shareText:@"分享我的宝贝每一天的记录"
+                                     shareImage:[UIImage imageWithContentsOfFile:SHAREPATH]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQzone,UMShareToQQ,UMShareToRenren,UMShareToDouban,UMShareToEmail,UMShareToSms,UMShareToFacebook,UMShareToTwitter,nil]
+                                       delegate:nil];
+    
     //构造分享内容
 //    id<ISSContent> publishContent = [ShareSDK content:@"分享内容"
 //                                       defaultContent:@"默认分享内容，没内容时显示"
@@ -330,6 +337,7 @@
     Shareview.frame=CGRectMake(20, 0, 280, 300);
     [UIView commitAnimations];
 }
+
 -(void)hidenshareview
 {
     [UIView setAnimationDuration:1];
@@ -895,41 +903,6 @@
         return cell;
     }
     else if (tableView == Advise){
-//        NSLog(@"indexPath row:%d", indexPath.row);
-//        if (indexPath.row != 0) {
-//            static NSString *contentIndentifer = @"Container";
-//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:contentIndentifer];
-//            if (cell == nil) {
-//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:contentIndentifer];
-//            }
-//            AdviseData *ad = [AdviseArray objectAtIndex:indexPath.section];
-//            NSLog(@"row %d",indexPath.section);
-//            [cell setBackgroundColor:[UIColor clearColor]];
-//
-//            cell.textLabel.font = [UIFont systemFontOfSize:12.0f];
-//            cell.textLabel.text = ad.mContent;
-//            cell.textLabel.textColor = [UIColor colorWithRed:0x97/255.0 green:0x97/255.0 blue:0x97/255.0 alpha:0xFF/255.0];
-//            cell.textLabel.opaque =        NO; // 选中Opaque表示视图后面的任何内容都不应该绘制
-//            cell.textLabel.numberOfLines = 20;
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            return cell;
-//        }
-//        
-//        static NSString *contentIndentifer = @"Title";
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:contentIndentifer];
-//        if (cell == nil) {
-//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:contentIndentifer];
-//        }
-//        NSString *str = @"Everything is OK!";
-//        NSLog(@"row %d",indexPath.section);
-//        [cell setBackgroundColor:[UIColor clearColor]];
-//
-//        cell.textLabel.font = [UIFont systemFontOfSize:16.0f];
-//        cell.textLabel.text = str;
-//        cell.textLabel.textColor = [UIColor colorWithRed:0.889 green:0.486 blue:0.882 alpha:1.000];
-//        
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        return cell;
         static NSString *CellIdentifier = @"Cell";
         
         UIImageView *tipsImageView;
@@ -1105,12 +1078,7 @@
         
         url = NSLocalizedString(key, nil);
         
-        //NSLog(@"index key: %@,%@", key, url);
-        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-
-        //NSLog(@"indexPath=%@",indexPath);
-        //NSLog(@"dicClicked=%@",dicClicked);
     }
 }
 
