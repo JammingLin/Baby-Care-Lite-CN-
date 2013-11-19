@@ -7,8 +7,8 @@
 //
 
 #import "defaultAppDelegate.h"
-#import <ShareSDK/ShareSDK.h>
 #import "APService.h"
+#import "UMSocial.h"
 
 @implementation defaultAppDelegate
 
@@ -83,6 +83,7 @@ void UncaughtExceptionHandler(NSException *exception) {
                                                    UIRemoteNotificationTypeAlert)];
     // Required
     [APService setupWithOption:launchOptions];
+    [UMSocialData setAppKey:UMENGAPPKEY];
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kAPNetworkDidReceiveMessageNotification object:nil];
@@ -118,7 +119,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     [TabbarController setViewControllers:controllers];
     self.window.rootViewController  = TabbarController;
     
-    [ShareSDK registerApp:@"b0bf0698120"];
+    //[ShareSDK registerApp:@"b0bf0698120"];
     [self initializePlat];
     
 }
@@ -126,13 +127,13 @@ void UncaughtExceptionHandler(NSException *exception) {
 - (void)initializePlat
 {
     //添加新浪微博应用
-    [ShareSDK connectSinaWeiboWithAppKey:@"2712555917"
-                               appSecret:@"c76318d478ffd11a81ee70b424f1b162"
-                             redirectUri:@"http://open.weibo.com/apps/2712555917"];
+    //[ShareSDK connectSinaWeiboWithAppKey:@"2712555917"
+    //                           appSecret:@"c76318d478ffd11a81ee70b424f1b162"
+    //                         redirectUri:@"http://open.weibo.com/apps/2712555917"];
         
     //添加Facebook应用
-    [ShareSDK connectFacebookWithAppKey:@"315050775296347"
-                              appSecret:@"2504ebbdbb8c22bd482b905edaf4a16c"];
+    //[ShareSDK connectFacebookWithAppKey:@"315050775296347"
+    //                          appSecret:@"2504ebbdbb8c22bd482b905edaf4a16c"];
     
 //    //添加腾讯微博应用
 //    [ShareSDK connectTencentWeiboWithAppKey:@"801307650"
@@ -249,8 +250,9 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 - (BOOL)application:(UIApplication *)application  handleOpenURL:(NSURL *)url
 {
-    return [ShareSDK handleOpenURL:url
-                        wxDelegate:self];
+    //return [ShareSDK handleOpenURL:url
+    //                    wxDelegate:self];
+    return TRUE;
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -258,10 +260,11 @@ void UncaughtExceptionHandler(NSException *exception) {
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    return [ShareSDK handleOpenURL:url
-                 sourceApplication:sourceApplication
-                        annotation:annotation
-                        wxDelegate:self];
+//    return [ShareSDK handleOpenURL:url
+//                 sourceApplication:sourceApplication
+//                        annotation:annotation
+//                        wxDelegate:self];
+    return TRUE;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
