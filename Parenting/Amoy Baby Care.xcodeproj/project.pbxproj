@@ -3069,8 +3069,8 @@
 		7215974117453680006FD415 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LI TINGBIN (D6MQ5ZWZVN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LI TINGBIN (D6MQ5ZWZVN)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3101,8 +3101,8 @@
 					"-Objc",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "AA5D37BE-1C43-4A43-ABFB-1951060C9087";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA5D37BE-1C43-4A43-ABFB-1951060C9087";
+				PROVISIONING_PROFILE = "088AF1F5-A029-404C-B1BA-37A13BCED5DF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "088AF1F5-A029-404C-B1BA-37A13BCED5DF";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
@@ -3113,8 +3113,8 @@
 		7215974217453680006FD415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LI TINGBIN (D6MQ5ZWZVN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LI TINGBIN (D6MQ5ZWZVN)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3145,8 +3145,8 @@
 					"-Objc",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "AA5D37BE-1C43-4A43-ABFB-1951060C9087";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA5D37BE-1C43-4A43-ABFB-1951060C9087";
+				PROVISIONING_PROFILE = "088AF1F5-A029-404C-B1BA-37A13BCED5DF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "088AF1F5-A029-404C-B1BA-37A13BCED5DF";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;

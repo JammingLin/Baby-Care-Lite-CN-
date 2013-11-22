@@ -74,22 +74,13 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self segmentSelected:(UIButton *)[self.view viewWithTag:101]];
+    static dispatch_once_t pred = 0;
     
-    [self TimeSelected:(UIButton*)[self.view viewWithTag:201]];
-   NSLog(@"mark%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"MARK"]);
-    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"MARK"] isEqualToString:@"1"] ||![[NSUserDefaults standardUserDefaults] objectForKey:@"MARK"]) {
+    dispatch_once(&pred, ^{
+        [self willShowView];
+        
+    });
 
-        [self MenuSelectIndex:0];
-        [backbutton setHidden:YES];
-
-    }
-    else
-    {
-        [backbutton setHidden:NO];
-    }
-
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -97,6 +88,25 @@
     
     [menu setValue:[NSNumber numberWithBool:NO] forKey:@"expanding"];
     
+}
+
+-(void)willShowView
+{
+    [self segmentSelected:(UIButton *)[self.view viewWithTag:101]];
+    
+    [self TimeSelected:(UIButton*)[self.view viewWithTag:201]];
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"MARK"] isEqualToString:@"1"] ||![[NSUserDefaults standardUserDefaults] objectForKey:@"MARK"]) {
+        
+        [self MenuSelectIndex:0];
+        [backbutton setHidden:YES];
+        
+    }
+    else
+    {
+        [backbutton setHidden:NO];
+    }
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)viewDidLoad
@@ -240,7 +250,7 @@
 - (void)ShareBtn{
     
     [self hidenshareview];
-    UIView *view = [[[[[UIApplication sharedApplication] windows] objectAtIndex:0] subviews] lastObject];//获得某个window的某个subView
+    //UIView *view = [[[[[UIApplication sharedApplication] windows] objectAtIndex:0] subviews] lastObject];//获得某个window的某个subView
     UIGraphicsBeginImageContext(CGSizeMake(plotScrollView.frame.size.width, plotScrollView.frame.size.height - 65));
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *parentImage=UIGraphicsGetImageFromCurrentImageContext();
@@ -372,7 +382,7 @@
         another2=(UIButton*)[self.view viewWithTag:103];
         self.Mark.hidden=NO;
         plot.hidden=NO;
-        if (!(selectIndex==0||selectIndex==5)) {
+        if (!(selectIndex==4)) {
             Histogram.hidden=NO;
             Plotting.hidden=NO;
         }
@@ -504,10 +514,10 @@
 
 -(void)makeMenu
 {
-    QuadCurveMenuItem *menuitemall = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_all.png"]
-                                                     highlightedImage:[UIImage imageNamed:@"btn_all_focus.png"]
-                                                         ContentImage:[UIImage imageNamed:@"btn_all.png"]
-                                              highlightedContentImage:[UIImage imageNamed:@"btn_all_focus.png"]];
+//    QuadCurveMenuItem *menuitemall = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_all.png"]
+//                                                     highlightedImage:[UIImage imageNamed:@"btn_all_focus.png"]
+//                                                         ContentImage:[UIImage imageNamed:@"btn_all.png"]
+//                                              highlightedContentImage:[UIImage imageNamed:@"btn_all_focus.png"]];
     // People MenuItem.
     QuadCurveMenuItem *menuitemplay = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_play.png"]
                                                       highlightedImage:[UIImage imageNamed:@"btn_play_focus.png"]
@@ -534,7 +544,7 @@
                                                             ContentImage:[UIImage imageNamed:@"btn_diaper.png"]
                                                  highlightedContentImage:[UIImage imageNamed:@"btn_diaper_focus.png"]];
     
-    NSArray *menus = [NSArray arrayWithObjects:menuitemall, menuitemplay, menuitembath, menuitemfeed, menuitemsleep, menuitemdiaper, nil];
+    NSArray *menus = [NSArray arrayWithObjects:menuitemplay, menuitembath, menuitemfeed, menuitemsleep, menuitemdiaper, nil];
     CGRect rx = [ UIScreen mainScreen ].bounds;
     
     float Y = 0.0;
@@ -564,7 +574,7 @@
     
     UIButton *btn=(UIButton*)[self.view viewWithTag:101];
     NSLog(@"idx  %d",idx);
-    if ((idx==0||idx==5)||btn.enabled) {
+    if ((idx==4)||btn.enabled) {
         Plotting.hidden=YES;
         Histogram.hidden=YES;
     }
@@ -574,19 +584,19 @@
         Histogram.hidden=NO;
     }
     switch (idx) {
+//        case 0:
+//        {
+//            ListArray=[[DataBase dataBase] selectAllforsummary];
+//            [List reloadData];
+//            
+//            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_BATH];
+//            AdviseArray = [DataBase selectsuggestionbath:advise_lock];
+//           // NSLog(@"%@",AdviseArray);
+//            chooseAdvise = ADVISE_TYPE_ALL;
+//            [Advise reloadData];
+//        }
+//            break;
         case 0:
-        {
-            ListArray=[[DataBase dataBase] selectAllforsummary];
-            [List reloadData];
-            
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_BATH];
-            AdviseArray = [DataBase selectsuggestionbath:advise_lock];
-           // NSLog(@"%@",AdviseArray);
-            chooseAdvise = ADVISE_TYPE_ALL;
-            [Advise reloadData];
-        }
-            break;
-        case 1:
         {
             ListArray=[[DataBase dataBase] selectplayforsummary];
             [List reloadData];
@@ -597,7 +607,7 @@
             [Advise reloadData];
         }
             break;
-        case 2:
+        case 1:
         {
             ListArray=[[DataBase dataBase] selectbathforsummary];
             [List reloadData];
@@ -608,7 +618,7 @@
             [Advise reloadData];
         }
             break;
-        case 3:
+        case 2:
         {
             ListArray=[[DataBase dataBase] selectfeedforsummary];
             [List reloadData];
@@ -619,7 +629,7 @@
             [Advise reloadData];
         }
             break;
-        case 4:
+        case 3:
         {
             ListArray=[[DataBase dataBase] selectsleepforsummary];
             [List reloadData];
@@ -630,7 +640,7 @@
             [Advise reloadData];
         }
             break;
-        case 5:
+        case 4:
         {
             ListArray=[[DataBase dataBase] selectdiaperforsummary];
             [List reloadData];
@@ -659,7 +669,7 @@
     
     UIButton *btn=(UIButton*)[self.view viewWithTag:101];
     NSLog(@"idx  %d",idx);
-    if ((idx==0||idx==5)||btn.enabled) {
+    if ((idx==4)||btn.enabled) {
         Plotting.hidden=YES;
         Histogram.hidden=YES;
     }
@@ -669,7 +679,7 @@
         Histogram.hidden=NO;
     }
     switch (idx) {
-        case 0:
+        case -1:
         {
             ListArray=[[DataBase dataBase] selectAllforsummary];
             [List reloadData];
@@ -681,7 +691,7 @@
             [Advise reloadData];
         }
             break;
-        case 1:
+        case 0:
         {
             ListArray=[[DataBase dataBase] selectplayforsummary];
             [List reloadData];
@@ -692,7 +702,7 @@
             [Advise reloadData];
         }
             break;
-        case 2:
+        case 1:
         {
             ListArray=[[DataBase dataBase] selectbathforsummary];
             [List reloadData];
@@ -703,7 +713,7 @@
             [Advise reloadData];
         }
             break;
-        case 3:
+        case 2:
         {
             ListArray=[[DataBase dataBase] selectfeedforsummary];
             [List reloadData];
@@ -714,7 +724,7 @@
             [Advise reloadData];
         }
             break;
-        case 4:
+        case 3:
         {
             ListArray=[[DataBase dataBase] selectsleepforsummary];
             [List reloadData];
@@ -725,7 +735,7 @@
             [Advise reloadData];
         }
             break;
-        case 5:
+        case 4:
         {
             ListArray=[[DataBase dataBase] selectdiaperforsummary];
             [List reloadData];
@@ -753,28 +763,28 @@
 - (NSString *)tableName:(int)tableTag{
     NSString *retStr;
     switch (tableTag) {
-        case 0:
+        case -1:
             selectIndex = 0;
             retStr = @"All";
             break;
+        case 0:
+            selectIndex = 0;
+            retStr = @"Play";
+            break;
         case 1:
             selectIndex = 1;
-            retStr = @"Play";
+            retStr = @"Bath";
             break;
         case 2:
             selectIndex = 2;
-            retStr = @"Bath";
+            retStr = @"Feed";
             break;
         case 3:
             selectIndex = 3;
-            retStr = @"Feed";
+            retStr = @"Sleep";
             break;
         case 4:
             selectIndex = 4;
-            retStr = @"Sleep";
-            break;
-        case 5:
-            selectIndex = 5;
             retStr = @"Diaper";
             break;
     }
