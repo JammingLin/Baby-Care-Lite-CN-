@@ -437,6 +437,7 @@ messageView;
     {
         case MFMailComposeResultCancelled:
             msg = @"邮件发送取消";
+            [self alertWithTitle:nil msg:msg];
             break;
         case MFMailComposeResultSaved:
             msg = @"邮件保存成功";
