@@ -36,6 +36,7 @@
 #import "defaultAppDelegate.h"
 #import "RNGridMenu.h"
 #import "MobClick.h"
+#import "MBProgressHUD.h"
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
 #define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
@@ -55,12 +56,12 @@
  *
  *	@return	0~5（all,play,bath,feed,sleep,diaper）
  */
-#define QCM_TYPE_ALL    0
-#define QCM_TYPE_PLAY   1
-#define QCM_TYPE_BATH   2
-#define QCM_TYPE_FEED   3
-#define QCM_TYPE_SLEEP  4
-#define QCM_TYPE_DIAPER 5
+#define QCM_TYPE_ALL    -1
+#define QCM_TYPE_PLAY   0
+#define QCM_TYPE_BATH   1
+#define QCM_TYPE_FEED   2
+#define QCM_TYPE_SLEEP  3
+#define QCM_TYPE_DIAPER 4
 
 //去log
 #ifdef DEBUG

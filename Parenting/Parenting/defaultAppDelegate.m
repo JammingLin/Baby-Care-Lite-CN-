@@ -84,6 +84,8 @@ void UncaughtExceptionHandler(NSException *exception) {
     // Required
     [APService setupWithOption:launchOptions];
     
+    //[APService setAlias:@"test" callbackSelector:nil object:self];
+    
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kAPNetworkDidReceiveMessageNotification object:nil];
     
