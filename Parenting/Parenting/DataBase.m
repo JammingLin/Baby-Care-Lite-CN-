@@ -701,7 +701,7 @@
 
 + (NSArray *)dataFromTable:(int)fileTag andpage:(int)scrollpage andTable:(NSString *)table
 {
-    NSLog(@"dataFromTable:%d, page:%d, table:%@", fileTag, scrollpage, table);
+    //NSLog(@"dataFromTable:%d, page:%d, table:%@", fileTag, scrollpage, table);
     int week    = [currentdate getCurrentWeek];
     int weekday = [currentdate getCurrentWeekDay];
     int month   = [currentdate getCurrentMonth];
