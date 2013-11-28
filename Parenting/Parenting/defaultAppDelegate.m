@@ -7,8 +7,8 @@
 //
 
 #import "defaultAppDelegate.h"
-#import <ShareSDK/ShareSDK.h>
 #import "APService.h"
+#import "UMSocial.h"
 
 @implementation defaultAppDelegate
 
@@ -92,6 +92,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 -(void)tap
 {
+
     homeViewController    = [[HomeViewController alloc] init];
     summaryViewController = [[SummaryViewController alloc] init];
     //adviseViewController  = [[AdviseMasterViewController alloc] init];
@@ -116,9 +117,22 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     TabbarController = [[MMXTabBarController alloc] init];
     [TabbarController setViewControllers:controllers];
-    self.window.rootViewController  = TabbarController;
     
-    [ShareSDK registerApp:@"b0bf0698120"];
+    
+    //添加引导页 Add By cwb 2013-11-26
+    //判断用户安装/更新软件后是否首次启用程序
+    NSString *guideVerson =[[NSUserDefaults standardUserDefaults] stringForKey:@"GuideVerson"];
+    if (![guideVerson  isEqual: GuideVerson])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:GuideVerson forKey:@"GuideVerson"];
+        guideViewController = [[GuideViewController alloc] initWithRootViewController:TabbarController];
+        self.window.rootViewController = guideViewController;
+    }
+    else{
+        self.window.rootViewController  = TabbarController;
+    }
+    //[ShareSDK registerApp:@"b0bf0698120"];
+    [UMSocialData setAppKey:UMENGAPPKEY];
     [self initializePlat];
     
 }
@@ -126,13 +140,13 @@ void UncaughtExceptionHandler(NSException *exception) {
 - (void)initializePlat
 {
     //添加新浪微博应用
-    [ShareSDK connectSinaWeiboWithAppKey:@"2712555917"
-                               appSecret:@"c76318d478ffd11a81ee70b424f1b162"
-                             redirectUri:@"http://open.weibo.com/apps/2712555917"];
+    //[ShareSDK connectSinaWeiboWithAppKey:@"2712555917"
+    //                           appSecret:@"c76318d478ffd11a81ee70b424f1b162"
+    //                         redirectUri:@"http://open.weibo.com/apps/2712555917"];
         
     //添加Facebook应用
-    [ShareSDK connectFacebookWithAppKey:@"315050775296347"
-                              appSecret:@"2504ebbdbb8c22bd482b905edaf4a16c"];
+    //[ShareSDK connectFacebookWithAppKey:@"315050775296347"
+    //                          appSecret:@"2504ebbdbb8c22bd482b905edaf4a16c"];
     
 //    //添加腾讯微博应用
 //    [ShareSDK connectTencentWeiboWithAppKey:@"801307650"
@@ -249,8 +263,9 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 - (BOOL)application:(UIApplication *)application  handleOpenURL:(NSURL *)url
 {
-    return [ShareSDK handleOpenURL:url
-                        wxDelegate:self];
+    //return [ShareSDK handleOpenURL:url
+    //                    wxDelegate:self];
+    return TRUE;
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -258,10 +273,11 @@ void UncaughtExceptionHandler(NSException *exception) {
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    return [ShareSDK handleOpenURL:url
-                 sourceApplication:sourceApplication
-                        annotation:annotation
-                        wxDelegate:self];
+//    return [ShareSDK handleOpenURL:url
+//                 sourceApplication:sourceApplication
+//                        annotation:annotation
+//                        wxDelegate:self];
+    return TRUE;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -270,12 +286,12 @@ void UncaughtExceptionHandler(NSException *exception) {
     // 取得 APNs 标准信息内容
     NSDictionary *aps = [userInfo valueForKey:@"aps"];
     NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
-    NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
-    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
+    //NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
+    //NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
     
     // 取得自定义字段内容
-    NSString *customizeField1 = [userInfo valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
-    NSLog(@"content =[%@], badge=[%d], sound=[%@], customize field =[%@]",content,badge,sound,customizeField1);
+    //NSString *customizeField1 = [userInfo valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
+    //NSLog(@"content =[%@], badge=[%d], sound=[%@], customize field =[%@]",content,badge,sound,customizeField1);
     
     application.applicationIconBadgeNumber += 1;
     //当用户打开程序时候收到远程通知后执行

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-
+#import "UMFeedback.h"
 
 typedef enum apiCall {
     kAPILogout,
@@ -35,7 +35,7 @@ typedef enum apiCall {
     kAPIGraphUserPhotosPost,
     kAPIGraphUserVideosPost,
 } apiCall;
-@interface SettingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,MFMailComposeViewControllerDelegate>
+@interface SettingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,UMFeedbackDataDelegate>
 {
     UIView *segementForMetric;
     UIAlertView *clearalert;
@@ -54,6 +54,7 @@ typedef enum apiCall {
     UIButton *logoutBtn;
     int currentAPICall;
 }
+@property (strong,nonatomic)  UMFeedback *umFeedback;
 @property (nonatomic, strong) NSArray *permissions;
 @property (nonatomic, strong)  UILabel *loginSuccessLabel;
 @property (nonatomic,strong) UILabel *shareInfoLabel;

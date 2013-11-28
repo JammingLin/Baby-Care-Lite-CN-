@@ -8,10 +8,9 @@
 
 #import "SummaryViewController.h"
 #import "defaultAppDelegate.h"
-
+#import "UMSocial.h"
 #import "QuadCurveMenuItem.h"
 #import "CustumCell.h"
-#import  <ShareSDK/ShareSDK.h>
 #import "AdviseData.h"
 #import "AdviseTableViewCell.h"
 
@@ -75,22 +74,13 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self segmentSelected:(UIButton *)[self.view viewWithTag:101]];
+    static dispatch_once_t pred = 0;
     
-    [self TimeSelected:(UIButton*)[self.view viewWithTag:201]];
-   NSLog(@"mark%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"MARK"]);
-    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"MARK"] isEqualToString:@"1"] ||![[NSUserDefaults standardUserDefaults] objectForKey:@"MARK"]) {
+    dispatch_once(&pred, ^{
+        [self willShowView];
+        
+    });
 
-        [self MenuSelectIndex:0];
-        [backbutton setHidden:YES];
-
-    }
-    else
-    {
-        [backbutton setHidden:NO];
-    }
-
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -98,6 +88,25 @@
     
     [menu setValue:[NSNumber numberWithBool:NO] forKey:@"expanding"];
     
+}
+
+-(void)willShowView
+{
+    [self segmentSelected:(UIButton *)[self.view viewWithTag:101]];
+    
+    [self TimeSelected:(UIButton*)[self.view viewWithTag:201]];
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"MARK"] isEqualToString:@"1"] ||![[NSUserDefaults standardUserDefaults] objectForKey:@"MARK"]) {
+        
+        [self MenuSelectIndex:0];
+        [backbutton setHidden:YES];
+        
+    }
+    else
+    {
+        [backbutton setHidden:NO];
+    }
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)viewDidLoad
@@ -152,35 +161,35 @@
 //    [button setImage:[UIImage imageNamed:@"icon_share.png"] forState:UIControlStateNormal];
 //    UIBarButtonItem *rtButton = [[UIBarButtonItem alloc] initWithCustomView:button];
 //    self.navigationItem.rightBarButtonItem = rtButton;
-    
-    Shareview=[[UIImageView alloc]initWithFrame:CGRectMake(20, -300+G_YADDONVERSION, 280, 300)];
-
-    
-    [Shareview setImage:[UIImage imageNamed:@"save_bg.png"]];
-    [Shareview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-    Shareview.userInteractionEnabled=YES;
-    UIImageView *Shareimage=[[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 260, 180)];
-    [Shareview addSubview:Shareimage];
-    Shareimage.tag=10001;
-    Shareimage.contentMode=UIViewContentModeScaleAspectFit;
-    Sharetext=[[UITextField alloc]initWithFrame:CGRectMake(10, 210, 260, 30)];
-    [Shareview addSubview:Sharetext];
-    Sharetext.tag=10002;
-    Sharetext.borderStyle=UITextBorderStyleRoundedRect;
-    
-    UIButton *share=[UIButton buttonWithType:UIButtonTypeCustom];
-    [share setTitle:NSLocalizedString(@"Share",nil) forState:UIControlStateNormal];
-    
-    share.frame=CGRectMake(155, 250, 100, 40);
-    [share setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
-    [share addTarget:self action:@selector(Share) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *cancle=[UIButton buttonWithType:UIButtonTypeCustom];
-    cancle.frame=CGRectMake(15, 250, 100, 40);
-    [cancle setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
-    [cancle addTarget:self action:@selector(hidenshareview) forControlEvents:UIControlEventTouchUpInside];
-    [cancle setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
-    [Shareview addSubview:share];
-    [Shareview addSubview:cancle];
+//    
+//    Shareview=[[UIImageView alloc]initWithFrame:CGRectMake(20, -300+G_YADDONVERSION, 280, 300)];
+//
+//    
+//    [Shareview setImage:[UIImage imageNamed:@"save_bg.png"]];
+//    [Shareview.image resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+//    Shareview.userInteractionEnabled=YES;
+//    UIImageView *Shareimage=[[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 260, 180)];
+//    [Shareview addSubview:Shareimage];
+//    Shareimage.tag=10001;
+//    Shareimage.contentMode=UIViewContentModeScaleAspectFit;
+//    Sharetext=[[UITextField alloc]initWithFrame:CGRectMake(10, 210, 260, 30)];
+//    [Shareview addSubview:Sharetext];
+//    Sharetext.tag=10002;
+//    Sharetext.borderStyle=UITextBorderStyleRoundedRect;
+//    
+//    UIButton *share=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [share setTitle:NSLocalizedString(@"Share",nil) forState:UIControlStateNormal];
+//    
+//    share.frame=CGRectMake(155, 250, 100, 40);
+//    [share setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
+//    [share addTarget:self action:@selector(Share) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *cancle=[UIButton buttonWithType:UIButtonTypeCustom];
+//    cancle.frame=CGRectMake(15, 250, 100, 40);
+//    [cancle setTitle:NSLocalizedString(@"Cancle",nil) forState:UIControlStateNormal];
+//    [cancle addTarget:self action:@selector(hidenshareview) forControlEvents:UIControlEventTouchUpInside];
+//    [cancle setBackgroundImage:[UIImage imageNamed:@"btn_setting.png"] forState:UIControlStateNormal];
+//    [Shareview addSubview:share];
+//    [Shareview addSubview:cancle];
     
     backbutton=[UIButton buttonWithType:UIButtonTypeCustom];
     [backbutton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
@@ -241,7 +250,7 @@
 - (void)ShareBtn{
     
     [self hidenshareview];
-//    UIView *view = [[[[[UIApplication sharedApplication] windows] objectAtIndex:0] subviews] lastObject];//获得某个window的某个subView
+    //UIView *view = [[[[[UIApplication sharedApplication] windows] objectAtIndex:0] subviews] lastObject];//获得某个window的某个subView
     UIGraphicsBeginImageContext(CGSizeMake(plotScrollView.frame.size.width, plotScrollView.frame.size.height - 65));
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *parentImage=UIGraphicsGetImageFromCurrentImageContext();
@@ -266,7 +275,7 @@
     [UIView commitAnimations];
     UIImageView *imageview=(UIImageView*)[Shareview viewWithTag:10001];
     imageview.image=image;
-//    [self showshareview];
+    [self showshareview];
     
     
     [self Share];
@@ -274,6 +283,13 @@
 -(void)Share
 {
 
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:UMENGAPPKEY
+                                      shareText:@"分享我的宝贝每一天的记录"
+                                     shareImage:[UIImage imageWithContentsOfFile:SHAREPATH]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQzone,UMShareToQQ,UMShareToRenren,UMShareToDouban,UMShareToEmail,UMShareToSms,UMShareToFacebook,UMShareToTwitter,nil]
+                                       delegate:nil];
+    
     //构造分享内容
 //    id<ISSContent> publishContent = [ShareSDK content:@"分享内容"
 //                                       defaultContent:@"默认分享内容，没内容时显示"
@@ -331,6 +347,7 @@
     Shareview.frame=CGRectMake(20, 0, 280, 300);
     [UIView commitAnimations];
 }
+
 -(void)hidenshareview
 {
     [UIView setAnimationDuration:1];
@@ -365,7 +382,7 @@
         another2=(UIButton*)[self.view viewWithTag:103];
         self.Mark.hidden=NO;
         plot.hidden=NO;
-        if (!(selectIndex==0||selectIndex==5)) {
+        if (!(selectIndex==4)) {
             Histogram.hidden=NO;
             Plotting.hidden=NO;
         }
@@ -497,10 +514,10 @@
 
 -(void)makeMenu
 {
-    QuadCurveMenuItem *menuitemall = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_all.png"]
-                                                     highlightedImage:[UIImage imageNamed:@"btn_all_focus.png"]
-                                                         ContentImage:[UIImage imageNamed:@"btn_all.png"]
-                                              highlightedContentImage:[UIImage imageNamed:@"btn_all_focus.png"]];
+//    QuadCurveMenuItem *menuitemall = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_all.png"]
+//                                                     highlightedImage:[UIImage imageNamed:@"btn_all_focus.png"]
+//                                                         ContentImage:[UIImage imageNamed:@"btn_all.png"]
+//                                              highlightedContentImage:[UIImage imageNamed:@"btn_all_focus.png"]];
     // People MenuItem.
     QuadCurveMenuItem *menuitemplay = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"btn_play.png"]
                                                       highlightedImage:[UIImage imageNamed:@"btn_play_focus.png"]
@@ -527,7 +544,7 @@
                                                             ContentImage:[UIImage imageNamed:@"btn_diaper.png"]
                                                  highlightedContentImage:[UIImage imageNamed:@"btn_diaper_focus.png"]];
     
-    NSArray *menus = [NSArray arrayWithObjects:menuitemall, menuitemplay, menuitembath, menuitemfeed, menuitemsleep, menuitemdiaper, nil];
+    NSArray *menus = [NSArray arrayWithObjects:menuitemplay, menuitembath, menuitemfeed, menuitemsleep, menuitemdiaper, nil];
     CGRect rx = [ UIScreen mainScreen ].bounds;
     
     float Y = 0.0;
@@ -557,7 +574,7 @@
     
     UIButton *btn=(UIButton*)[self.view viewWithTag:101];
     NSLog(@"idx  %d",idx);
-    if ((idx==0||idx==5)||btn.enabled) {
+    if ((idx==4)||btn.enabled) {
         Plotting.hidden=YES;
         Histogram.hidden=YES;
     }
@@ -567,19 +584,19 @@
         Histogram.hidden=NO;
     }
     switch (idx) {
+//        case 0:
+//        {
+//            ListArray=[[DataBase dataBase] selectAllforsummary];
+//            [List reloadData];
+//            
+//            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_BATH];
+//            AdviseArray = [DataBase selectsuggestionbath:advise_lock];
+//           // NSLog(@"%@",AdviseArray);
+//            chooseAdvise = ADVISE_TYPE_ALL;
+//            [Advise reloadData];
+//        }
+//            break;
         case 0:
-        {
-            ListArray=[[DataBase dataBase] selectAllforsummary];
-            [List reloadData];
-            
-            int advise_lock = [DataBase selectFromUserAdvise:ADVISE_TYPE_BATH];
-            AdviseArray = [DataBase selectsuggestionbath:advise_lock];
-           // NSLog(@"%@",AdviseArray);
-            chooseAdvise = ADVISE_TYPE_ALL;
-            [Advise reloadData];
-        }
-            break;
-        case 1:
         {
             ListArray=[[DataBase dataBase] selectplayforsummary];
             [List reloadData];
@@ -590,7 +607,7 @@
             [Advise reloadData];
         }
             break;
-        case 2:
+        case 1:
         {
             ListArray=[[DataBase dataBase] selectbathforsummary];
             [List reloadData];
@@ -601,7 +618,7 @@
             [Advise reloadData];
         }
             break;
-        case 3:
+        case 2:
         {
             ListArray=[[DataBase dataBase] selectfeedforsummary];
             [List reloadData];
@@ -612,7 +629,7 @@
             [Advise reloadData];
         }
             break;
-        case 4:
+        case 3:
         {
             ListArray=[[DataBase dataBase] selectsleepforsummary];
             [List reloadData];
@@ -623,7 +640,7 @@
             [Advise reloadData];
         }
             break;
-        case 5:
+        case 4:
         {
             ListArray=[[DataBase dataBase] selectdiaperforsummary];
             [List reloadData];
@@ -652,7 +669,7 @@
     
     UIButton *btn=(UIButton*)[self.view viewWithTag:101];
     NSLog(@"idx  %d",idx);
-    if ((idx==0||idx==5)||btn.enabled) {
+    if ((idx==4)||btn.enabled) {
         Plotting.hidden=YES;
         Histogram.hidden=YES;
     }
@@ -662,7 +679,7 @@
         Histogram.hidden=NO;
     }
     switch (idx) {
-        case 0:
+        case -1:
         {
             ListArray=[[DataBase dataBase] selectAllforsummary];
             [List reloadData];
@@ -674,7 +691,7 @@
             [Advise reloadData];
         }
             break;
-        case 1:
+        case 0:
         {
             ListArray=[[DataBase dataBase] selectplayforsummary];
             [List reloadData];
@@ -685,7 +702,7 @@
             [Advise reloadData];
         }
             break;
-        case 2:
+        case 1:
         {
             ListArray=[[DataBase dataBase] selectbathforsummary];
             [List reloadData];
@@ -696,7 +713,7 @@
             [Advise reloadData];
         }
             break;
-        case 3:
+        case 2:
         {
             ListArray=[[DataBase dataBase] selectfeedforsummary];
             [List reloadData];
@@ -707,7 +724,7 @@
             [Advise reloadData];
         }
             break;
-        case 4:
+        case 3:
         {
             ListArray=[[DataBase dataBase] selectsleepforsummary];
             [List reloadData];
@@ -718,7 +735,7 @@
             [Advise reloadData];
         }
             break;
-        case 5:
+        case 4:
         {
             ListArray=[[DataBase dataBase] selectdiaperforsummary];
             [List reloadData];
@@ -746,28 +763,28 @@
 - (NSString *)tableName:(int)tableTag{
     NSString *retStr;
     switch (tableTag) {
-        case 0:
+        case -1:
             selectIndex = 0;
             retStr = @"All";
             break;
+        case 0:
+            selectIndex = 0;
+            retStr = @"Play";
+            break;
         case 1:
             selectIndex = 1;
-            retStr = @"Play";
+            retStr = @"Bath";
             break;
         case 2:
             selectIndex = 2;
-            retStr = @"Bath";
+            retStr = @"Feed";
             break;
         case 3:
             selectIndex = 3;
-            retStr = @"Feed";
+            retStr = @"Sleep";
             break;
         case 4:
             selectIndex = 4;
-            retStr = @"Sleep";
-            break;
-        case 5:
-            selectIndex = 5;
             retStr = @"Diaper";
             break;
     }
@@ -896,41 +913,6 @@
         return cell;
     }
     else if (tableView == Advise){
-//        NSLog(@"indexPath row:%d", indexPath.row);
-//        if (indexPath.row != 0) {
-//            static NSString *contentIndentifer = @"Container";
-//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:contentIndentifer];
-//            if (cell == nil) {
-//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:contentIndentifer];
-//            }
-//            AdviseData *ad = [AdviseArray objectAtIndex:indexPath.section];
-//            NSLog(@"row %d",indexPath.section);
-//            [cell setBackgroundColor:[UIColor clearColor]];
-//
-//            cell.textLabel.font = [UIFont systemFontOfSize:12.0f];
-//            cell.textLabel.text = ad.mContent;
-//            cell.textLabel.textColor = [UIColor colorWithRed:0x97/255.0 green:0x97/255.0 blue:0x97/255.0 alpha:0xFF/255.0];
-//            cell.textLabel.opaque =        NO; // 选中Opaque表示视图后面的任何内容都不应该绘制
-//            cell.textLabel.numberOfLines = 20;
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            return cell;
-//        }
-//        
-//        static NSString *contentIndentifer = @"Title";
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:contentIndentifer];
-//        if (cell == nil) {
-//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:contentIndentifer];
-//        }
-//        NSString *str = @"Everything is OK!";
-//        NSLog(@"row %d",indexPath.section);
-//        [cell setBackgroundColor:[UIColor clearColor]];
-//
-//        cell.textLabel.font = [UIFont systemFontOfSize:16.0f];
-//        cell.textLabel.text = str;
-//        cell.textLabel.textColor = [UIColor colorWithRed:0.889 green:0.486 blue:0.882 alpha:1.000];
-//        
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        return cell;
         static NSString *CellIdentifier = @"Cell";
         
         UIImageView *tipsImageView;
@@ -1106,12 +1088,7 @@
         
         url = NSLocalizedString(key, nil);
         
-        //NSLog(@"index key: %@,%@", key, url);
-        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-
-        //NSLog(@"indexPath=%@",indexPath);
-        //NSLog(@"dicClicked=%@",dicClicked);
     }
 }
 
