@@ -32,6 +32,7 @@
 "Facebook"="Facebook";
 "Review App"="检查应用";
 "Submit feedback/improvements"="提交反馈";
+"Submit feedback online"="在线反馈";
 "Copyright"="版权信息";
 "Clear all logged data"="清除数据记录";
 "Delete"="删除";
@@ -39,6 +40,13 @@
 "Sign out"="退出";
 "Metric"="公制";
 "Imperial"="英制";
+"UMSend"="发送";
+"UMFeedback"="在线反馈";
+"UMBaseinfo"="性别/年龄";
+"UMAge"="年龄";
+"UMSex"="性别";
+"UMUnder15"="15岁以下";
+"UMAbove61"="61岁以上";
 
 "Name:"="姓名:";
 "Birthday:"="生日:";

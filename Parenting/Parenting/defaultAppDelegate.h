@@ -13,6 +13,8 @@
 #import "AdviseMasterViewController.h"
 #import "InformationCenterViewController.h"
 
+#import "GuideViewController.h"
+
 #import "MMXTabBarController.h"
 
 
@@ -26,6 +28,8 @@
     InformationCenterViewController *icViewController;
     SummaryViewController       *summaryViewController;
     HomeViewController          *homeViewController;
+    
+    GuideViewController         *guideViewController;
     
     UINavigationController *settingNavigationViewController;
     UINavigationController *adviseNavigationViewController;
