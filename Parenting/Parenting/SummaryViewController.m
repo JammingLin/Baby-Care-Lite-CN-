@@ -74,6 +74,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+<<<<<<< HEAD
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.color = [UIColor grayColor];
@@ -89,6 +90,15 @@
         NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(willShowView:) object:[NSNumber numberWithBool:NO]];
         [thread start];
     }
+=======
+    static dispatch_once_t pred = 0;
+    
+    dispatch_once(&pred, ^{
+        [self willShowView];
+        
+    });
+
+>>>>>>> pr/2
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -98,7 +108,11 @@
     
 }
 
+<<<<<<< HEAD
 -(void)willShowView:(NSNumber*)flag
+=======
+-(void)willShowView
+>>>>>>> pr/2
 {
     [self segmentSelected:(UIButton *)[self.view viewWithTag:101]];
     
@@ -115,10 +129,13 @@
     }
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
+<<<<<<< HEAD
     if ([flag boolValue]==YES) {
         [self scrollUpadateData];
     }
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+=======
+>>>>>>> pr/2
 }
 
 - (void)viewDidLoad

@@ -11,6 +11,7 @@
 #import "CopyrightViewController.h"
 #import "BabyinfoViewController.h"
 #import "defaultAppDelegate.h"
+#import "UMFeedbackViewController.h"
 
 @interface SettingViewController ()
 @property (strong, nonatomic) UITableView *settingTable;
@@ -77,7 +78,7 @@ messageView;
     SettingItem *_item1 = [[SettingItem alloc]init];
     SettingItem *_item2 = [[SettingItem alloc]init];
     SettingItem *_item3 = [[SettingItem alloc]init];
-
+    SettingItem *_item4=[[SettingItem alloc]init];
     //SettingItem *_item5=[[SettingItem alloc]init];
     SettingItem *_item6 = [[SettingItem alloc]init];
     SettingItem *_item7 = [[SettingItem alloc]init];
@@ -86,6 +87,7 @@ messageView;
     _item1.name=NSLocalizedString(@"Baby information",nil);
     _item2.name=NSLocalizedString(@"Metric/Imperial",nil);
     _item3.name=NSLocalizedString(@"Notifications",nil);
+    _item4.name=NSLocalizedString(@"Submit feedback online",nil);
 //    _item4.name=NSLocalizedString(@"Facebook",nil);
     //_item5.name=NSLocalizedString(@"Review App",nil);
     _item6.name=NSLocalizedString(@"Submit feedback/improvements",nil);
@@ -99,6 +101,10 @@ messageView;
     UIButton *detailforReview=[UIButton buttonWithType:UIButtonTypeCustom];
     [detailforReview setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
     detailforReview.frame=CGRectMake(0, 0, 20, 20);
+    
+    UIButton *feedbackOnline=[UIButton buttonWithType:UIButtonTypeCustom];
+    [feedbackOnline setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
+    feedbackOnline.frame=CGRectMake(0, 0, 20, 20);
     
     UIButton *detailforSubmit=[UIButton buttonWithType:UIButtonTypeCustom];    
     [detailforSubmit setImage:[[UIImage imageNamed:@"btn_right.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)] forState:UIControlStateNormal];
@@ -165,6 +171,7 @@ messageView;
     _item1.accessView=detailforbaby;
     _item2.accessView=segementForMetric;
     _item3.accessView=switchForNotifications;
+    _item4.accessView=feedbackOnline;
 //    _item4.accessView=buttonForFacebook;
     //_item5.accessView=detailforReview;
     _item6.accessView=detailforSubmit;
@@ -175,7 +182,7 @@ messageView;
     [_array1 addObject:_item1];
     [_array2 addObject:_item2];
     [_array2 addObject:_item3];
-//    [_array2 addObject:_item4];
+    [_array2 addObject:_item4];
     //[_array2 addObject:_item5];
     [_array2 addObject:_item6];
     [_array2 addObject:_item7];
@@ -209,7 +216,10 @@ messageView;
     _settingTable.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:_settingTable];
     
-
+    //在线反馈
+    [UMFeedback setLogEnabled:YES];
+    _umFeedback = [UMFeedback sharedInstance];
+    [_umFeedback setAppkey:UMENGAPPKEY delegate:self];
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -296,6 +306,15 @@ messageView;
     else if([item.name isEqualToString:NSLocalizedString(@"Review App",nil)]){
         
     }
+    else if ([item.name isEqualToString:NSLocalizedString(@"Submit feedback online", nil)]){
+        //undone feedback
+        UMFeedbackViewController *feedbackViewController = [[UMFeedbackViewController alloc] initWithNibName:@"UMFeedbackViewController" bundle:nil];
+        feedbackViewController.appkey = UMENGAPPKEY;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:feedbackViewController];
+        navigationController.navigationBar.barStyle = UIBarStyleBlack;
+        navigationController.navigationBar.translucent = NO;
+        [self presentViewController:navigationController animated:YES completion:^{}];//        [self onlineFeedBack];
+    }
     else if([item.name isEqualToString:NSLocalizedString(@"Submit feedback/improvements",nil)]){
         [self sendEMail];
     }
@@ -362,8 +381,10 @@ messageView;
 }
 
 
-
-
+//在线反馈
+-(void)onlineFeedBack{
+    
+}
 
 //点击按钮后，触发这个方法
 -(void)sendEMail

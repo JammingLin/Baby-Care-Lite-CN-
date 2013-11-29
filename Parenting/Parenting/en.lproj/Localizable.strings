@@ -30,6 +30,7 @@
 "Facebook"="Facebook";
 "Review App"="Review App";
 "Submit feedback/improvements"="Submit feedback/improvements";
+"Submit feedback online"="Submit feedback online";
 "Copyright"="Copyright";
 "Clear all logged data"="Clear all logged data";
 "Delete"="Delete";
@@ -37,6 +38,13 @@
 "Sign out"="Sign out";
 "Metric"="Metric";
 "Imperial"="Imperial";
+"UMSend"="Send";
+"UMFeedback"="Feedback Online";
+"UMBaseinfo"="Gender/Age";
+"UMAge"="Age";
+"UMSex"="Gender";
+"UMUnder15"="Under 15";
+"UMAbove61"="Above 61";
 
 "Name:"="Name:";
 "Birthday:"="Birthday:";

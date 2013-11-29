@@ -16,7 +16,7 @@ NSUncaughtExceptionHandler* _uncaughtExceptionHandler = nil;
 void UncaughtExceptionHandler(NSException *exception) {
     NSLog(@"CRASH: %@", exception);
     NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
-    // 异常的堆栈信息
+    // 异常的堆栈信息  avitest cwbtest
     NSArray *stackArray = [exception callStackSymbols];
     // 出现异常的原因
     NSString *reason = [exception reason];
@@ -94,6 +94,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 -(void)tap
 {
+
     homeViewController    = [[HomeViewController alloc] init];
     summaryViewController = [[SummaryViewController alloc] init];
     //adviseViewController  = [[AdviseMasterViewController alloc] init];
@@ -118,8 +119,23 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     TabbarController = [[MMXTabBarController alloc] init];
     [TabbarController setViewControllers:controllers];
-    self.window.rootViewController  = TabbarController;
     
+<<<<<<< HEAD
+=======
+    
+    //添加引导页 Add By cwb 2013-11-26
+    //判断用户安装/更新软件后是否首次启用程序
+    NSString *guideVerson =[[NSUserDefaults standardUserDefaults] stringForKey:@"GuideVerson"];
+    if (![guideVerson  isEqual: GuideVerson])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:GuideVerson forKey:@"GuideVerson"];
+        guideViewController = [[GuideViewController alloc] initWithRootViewController:TabbarController];
+        self.window.rootViewController = guideViewController;
+    }
+    else{
+        self.window.rootViewController  = TabbarController;
+    }
+>>>>>>> pr/2
     //[ShareSDK registerApp:@"b0bf0698120"];
     [UMSocialData setAppKey:UMENGAPPKEY];
     [self initializePlat];
