@@ -16,8 +16,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *back;
 
 @property (strong, nonatomic) IBOutlet UILabel *detail;
-- (IBAction)showdetail:(UIButton *)sender;
 - (id)initWithAdviseData:(AdviseData*)adata andAdviseLevel:(AdviseLevel *)alevel;
-- (IBAction)goback:(id)sender;
 
 @end
