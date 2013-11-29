@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherAdviseViewController">
             <connections>
+                <outlet property="back" destination="hbY-cs-SrK" id="4wJ-xN-pSz"/>
                 <outlet property="detail" destination="c06-4d-MgU" id="VLV-Pd-VHK"/>
                 <outlet property="detailBtn" destination="eXV-gN-b5d" id="d0Q-wO-a3D"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -30,8 +31,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbY-cs-SrK">
-                    <rect key="frame" x="137" y="195" width="46" height="30"/>
+                    <rect key="frame" x="88" y="179" width="141" height="65"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.53500944500000003" blue="0.81042085370000005" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="Back">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
