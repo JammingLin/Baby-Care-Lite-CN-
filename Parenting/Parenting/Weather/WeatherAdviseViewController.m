@@ -47,7 +47,7 @@
     return self;
 }
 
-- (IBAction)goback:(id)sender {
+- (void)goback {
     [self.view removeFromSuperview];
 }
 
@@ -76,7 +76,8 @@
     // Do any additional setup after loading the view from its nib.
     self.detail.text      = self.ad.mContent;
     self.detail.textColor = [UIColor blackColor];
-    [self.detailBtn addTarget:self action:@selector(showdetail:) forControlEvents:UIControlEventTouchUpInside];
+    [self.detailBtn addTarget:self action:@selector(showdetail) forControlEvents:UIControlEventTouchUpInside];
+    [self.back addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,7 +86,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)showdetail:(UIButton *)sender {
+- (void)showdetail
+{
     self.detail.hidden = NO;
 }
 @end

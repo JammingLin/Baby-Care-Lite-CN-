@@ -13,6 +13,8 @@
 @property (strong, nonatomic)  AdviseData  *ad;
 @property (strong, nonatomic)  AdviseLevel *al;
 @property (strong, nonatomic) IBOutlet UIButton *detailBtn;
+@property (strong, nonatomic) IBOutlet UIButton *back;
+
 @property (strong, nonatomic) IBOutlet UILabel *detail;
 - (IBAction)showdetail:(UIButton *)sender;
 - (id)initWithAdviseData:(AdviseData*)adata andAdviseLevel:(AdviseLevel *)alevel;
