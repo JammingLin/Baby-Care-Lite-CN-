@@ -13,10 +13,7 @@
 
 -(void)dealloc
 {
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-    
 }
 - (id)initWithFrame:(CGRect)frame
 {
@@ -31,7 +28,7 @@
 {
     self.start=_start;
     self.select=_select;
-    NSArray *array = [_curduration componentsSeparatedByString:@":"];
+    NSArray *array    = [_curduration componentsSeparatedByString:@":"];
     self.durationhour = [[array objectAtIndex:0] intValue];
     self.durationmin  = [[array objectAtIndex:1] intValue];
     self.durationsec  = [[array objectAtIndex:2] intValue];
@@ -65,8 +62,6 @@
     [self addSubview:imageview];
     [imageview addSubview:title];
     
-    // saveView.backgroundColor=[UIColor colorWithWhite:0.4 alpha:0.3];
-    
     imageview.backgroundColor=[UIColor clearColor];
     imageview.userInteractionEnabled=YES;
     imageview.image=[UIImage imageNamed:@"save_bg.png"];
@@ -79,8 +74,6 @@
     UILabel *duration=[[UILabel alloc]initWithFrame:CGRectMake(10, 120, 100, 30)];
     
     UILabel *remark=[[UILabel alloc]initWithFrame:CGRectMake(10, 160, 100, 30)];
-    
-
     
     date.backgroundColor=[UIColor clearColor];
     starttime.backgroundColor=[UIColor clearColor];
@@ -316,6 +309,7 @@
     }
     
     [self.sleepSaveDelegate sendSleepSaveChanged:duration andstarttime:curstarttime];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"justdoit"];
 }
 -(void)cancle:(UIButton*)sender
 {

@@ -84,6 +84,7 @@
     [db close];
     return res;
 }
+
 -(BOOL)insertplayStarttime:(NSDate *)starttime Month:(int)month Week:(int)week WeekDay:(int)weekday Duration:(int)duration Remark:(NSString *)remark
 {
     BOOL res;
@@ -334,6 +335,7 @@
      
     return str;
 }
+
 -(NSString*)selectFromfeed
 {
     BOOL res;
@@ -701,7 +703,7 @@
 
 + (NSArray *)dataFromTable:(int)fileTag andpage:(int)scrollpage andTable:(NSString *)table
 {
-    NSLog(@"dataFromTable:%d, page:%d, table:%@", fileTag, scrollpage, table);
+    //NSLog(@"dataFromTable:%d, page:%d, table:%@", fileTag, scrollpage, table);
     int week    = [currentdate getCurrentWeek];
     int weekday = [currentdate getCurrentWeekDay];
     int month   = [currentdate getCurrentMonth];
