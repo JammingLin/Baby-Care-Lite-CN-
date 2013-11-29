@@ -84,6 +84,7 @@
     [db close];
     return res;
 }
+
 -(BOOL)insertplayStarttime:(NSDate *)starttime Month:(int)month Week:(int)week WeekDay:(int)weekday Duration:(int)duration Remark:(NSString *)remark
 {
     BOOL res;
@@ -334,6 +335,7 @@
      
     return str;
 }
+
 -(NSString*)selectFromfeed
 {
     BOOL res;

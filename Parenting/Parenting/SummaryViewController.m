@@ -13,6 +13,7 @@
 #import "CustumCell.h"
 #import "AdviseData.h"
 #import "AdviseTableViewCell.h"
+#import "TipsWebViewController.h"
 
 #define originalHeight 25.0f
 #define newHeight 100.0f
@@ -74,13 +75,27 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    static dispatch_once_t pred = 0;
-    
-    dispatch_once(&pred, ^{
-        [self willShowView];
-        
-    });
-
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"gototips"]boolValue] == YES) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"gototips"];
+    }
+    else
+    {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.color = [UIColor grayColor];
+        hud.alpha = 0.5;
+        hud.labelText = NSLocalizedString(@"PlotLoading", nil);
+        if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"justdoit"] boolValue] == YES) {
+            NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(willShowView:) object:[NSNumber numberWithBool:YES]];
+            [thread start];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"justdoit"];
+        }
+        else
+        {
+            NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(willShowView:) object:[NSNumber numberWithBool:NO]];
+            [thread start];
+        }
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -90,7 +105,7 @@
     
 }
 
--(void)willShowView
+-(void)willShowView:(NSNumber*)flag
 {
     [self segmentSelected:(UIButton *)[self.view viewWithTag:101]];
     
@@ -107,6 +122,10 @@
     }
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bg_title.png"]  forBarMetrics:UIBarMetricsDefault];
+    if ([flag boolValue]==YES) {
+        [self scrollUpadateData];
+    }
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 - (void)viewDidLoad
@@ -208,6 +227,17 @@
     
     UIBarButtonItem *backbar=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=backbar;
+
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"MARK"] isEqualToString:@"1"] ||![[NSUserDefaults standardUserDefaults] objectForKey:@"MARK"]) {
+        
+        [self MenuSelectIndex:0];
+        [backbutton setHidden:YES];
+        
+    }
+    else
+    {
+        [backbutton setHidden:NO];
+    }
 
     
     [self.view bringSubviewToFront:menu];
@@ -1088,7 +1118,12 @@
         
         url = NSLocalizedString(key, nil);
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        TipsWebViewController *tips = [[TipsWebViewController alloc] init];
+        [tips setTipsUrl:url];
+        [self.navigationController pushViewController:tips animated:YES];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"gototips"];
+
     }
 }
 
@@ -1201,9 +1236,13 @@
 }
 
 - (void)scrollUpadateData{
+
     CGRect rx = [UIScreen mainScreen ].bounds;
     NSLog(@"scrollUpdateData:%d, %d",plotTag,[DataBase scrollWidth:plotTag]);
-    for (int i = 0; i < [DataBase scrollWidth:plotTag]; i++) {
+    int range = [DataBase scrollWidth:plotTag];
+    int j = 0;
+    for (int i = range - 1; i >= 0;i--)
+    {
         NSArray *data  = [DataBase scrollData:i andTable:[self tableName:selectIndex] andFieldTag:plotTag];
         int maxmonthday = [DataBase getMonthMax:i];
        //NSLog(@"%@",data);
@@ -1222,10 +1261,11 @@
             xLength = 6.0f;
         }
        
-        plot = [[MyCorePlot alloc] initWithFrame:CGRectMake(([DataBase scrollWidth:plotTag] - i - 1) * 320, 0, 320, rx.size.height - 40 - 35 - 49-20) andTitle:[self tableName:selectIndex] andXplotRangeWithLocation:0.0f andXlength:xLength andYplotRangeWithLocation:0.0f andYlength:maxyAxis * 1.5 andDataSource:data andXAxisTag:plotTag andMaxDay:maxmonthday];
+        plot = [[MyCorePlot alloc] initWithFrame:CGRectMake(([DataBase scrollWidth:plotTag] - j - 1) * 320, 0, 320, rx.size.height - 40 - 35 - 49-20) andTitle:[self tableName:selectIndex] andXplotRangeWithLocation:0.0f andXlength:xLength andYplotRangeWithLocation:0.0f andYlength:maxyAxis * 1.5 andDataSource:data andXAxisTag:plotTag andMaxDay:maxmonthday];
         [plotScrollView addSubview:plot];
         [self setName];
         [plotArray addObject:plot];
+        j++;
     }
     [plotScrollView scrollRectToVisible:CGRectMake([DataBase scrollWidth:plotTag] * 320 - 320, 0, 320, rx.size.height - 40 - 35 - 49-20) animated:NO];
     [self.view bringSubviewToFront:self.Mark];

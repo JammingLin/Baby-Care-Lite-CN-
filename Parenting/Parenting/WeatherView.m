@@ -8,6 +8,9 @@
 
 #import "WeatherView.h"
 #import "Environmentitem.h"
+#import "EnvironmentAdviceDataBase.h"
+#import "WeatherAdviseViewController.h"
+
 @implementation WeatherView
 @synthesize dataarray;
 +(id)weatherview
@@ -151,6 +154,19 @@
         if([[dict objectForKey:@"temp"] length]>0)
         {
             temp.detail=[NSString stringWithFormat:@"%@℃",[dict objectForKey:@"temp"]];
+            NSArray *arr = [EnvironmentAdviceDataBase selectSleepSuggestionByTemp:[[dict objectForKey:@"temp"] intValue]];
+            if ([arr count]>0) {
+                AdviseLevel *al = [arr objectAtIndex:0];
+                NSArray *a2 = [EnvironmentAdviceDataBase selectsuggestiontemp:al.mAdviseId];
+                if ([a2 count]>0) {
+                   AdviseData* ad = [a2 objectAtIndex:0];
+                    tempcontent = ad.mContent;
+                    templevel   = al.mLevel;
+                    mAd = ad;
+                    mAl = al;
+                }
+            }
+            
         }
         if ([[dict objectForKey:@"humidity"] length]>0) {
             humi.detail=[NSString stringWithFormat:@"%@ %%",[dict objectForKey:@"humidity"]];
@@ -193,9 +209,7 @@
 //
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSLog(@"%d", [dataarray count]);
     return dataarray.count;
-        
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -248,4 +262,12 @@
 {
     return 1.5;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    WeatherAdviseViewController *wavc = [[WeatherAdviseViewController alloc] initWithAdviseData:mAd andAdviseLevel:mAl];
+    [self addSubview:wavc.view];
+    //[self pushViewController:wavc animated:YES];
+}
+
 @end
