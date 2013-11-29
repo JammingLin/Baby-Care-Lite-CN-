@@ -12,6 +12,10 @@
 		480C04D11828C9E600846E13 /* Submit_Btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 480C04CF1828C9E600846E13 /* Submit_Btn.png */; };
 		480C04D21828C9E600846E13 /* Submit_Btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 480C04D01828C9E600846E13 /* Submit_Btn@2x.png */; };
 		48140BC217E03EBA0049EE17 /* AdviseData.m in Sources */ = {isa = PBXBuildFile; fileRef = 48140BC117E03EB90049EE17 /* AdviseData.m */; };
+		48357E231846ED2A00BCF799 /* EnvironmentAdviceDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E221846ED2A00BCF799 /* EnvironmentAdviceDataBase.m */; };
+		48357E2618472BB500BCF799 /* AdviseLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E2518472BB500BCF799 /* AdviseLevel.m */; };
+		48357E2A18473EC400BCF799 /* WeatherAdviseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48357E2818473EC400BCF799 /* WeatherAdviseViewController.m */; };
+		48357E2B18473EC400BCF799 /* WeatherAdviseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48357E2918473EC400BCF799 /* WeatherAdviseViewController.xib */; };
 		483D08D318164C9B00E720E6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483D08D218164C9B00E720E6 /* CoreTelephony.framework */; };
 		483D08D518164CB600E720E6 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 483D08D418164CB600E720E6 /* libstdc++.dylib */; };
 		483D08D718164CCA00E720E6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483D08D618164CCA00E720E6 /* Security.framework */; };
@@ -526,6 +530,13 @@
 		480C04D01828C9E600846E13 /* Submit_Btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Submit_Btn@2x.png"; sourceTree = "<group>"; };
 		48140BC017E03EB70049EE17 /* AdviseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdviseData.h; sourceTree = "<group>"; };
 		48140BC117E03EB90049EE17 /* AdviseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdviseData.m; sourceTree = "<group>"; };
+		48357E211846ED2A00BCF799 /* EnvironmentAdviceDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnvironmentAdviceDataBase.h; path = LocalData/EnvironmentAdviceDataBase.h; sourceTree = "<group>"; };
+		48357E221846ED2A00BCF799 /* EnvironmentAdviceDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnvironmentAdviceDataBase.m; path = LocalData/EnvironmentAdviceDataBase.m; sourceTree = "<group>"; };
+		48357E2418472BB500BCF799 /* AdviseLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdviseLevel.h; path = AdviseLevel/AdviseLevel.h; sourceTree = "<group>"; };
+		48357E2518472BB500BCF799 /* AdviseLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdviseLevel.m; path = AdviseLevel/AdviseLevel.m; sourceTree = "<group>"; };
+		48357E2718473EC400BCF799 /* WeatherAdviseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherAdviseViewController.h; path = Weather/WeatherAdviseViewController.h; sourceTree = "<group>"; };
+		48357E2818473EC400BCF799 /* WeatherAdviseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherAdviseViewController.m; path = Weather/WeatherAdviseViewController.m; sourceTree = "<group>"; };
+		48357E2918473EC400BCF799 /* WeatherAdviseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WeatherAdviseViewController.xib; path = Weather/WeatherAdviseViewController.xib; sourceTree = "<group>"; };
 		483D08D218164C9B00E720E6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		483D08D418164CB600E720E6 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		483D08D618164CCA00E720E6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1384,6 +1395,9 @@
 				CE0D0EAC175735B3005A3200 /* WeatherView.m */,
 				CE0D0EC917574AFE005A3200 /* Environmentitem.h */,
 				CE0D0ECA17574AFE005A3200 /* Environmentitem.m */,
+				48357E2718473EC400BCF799 /* WeatherAdviseViewController.h */,
+				48357E2818473EC400BCF799 /* WeatherAdviseViewController.m */,
+				48357E2918473EC400BCF799 /* WeatherAdviseViewController.xib */,
 			);
 			name = Weather;
 			sourceTree = "<group>";
@@ -1402,6 +1416,8 @@
 			children = (
 				CE0C33D617618AC200B1B683 /* DataBase.h */,
 				CE0C33D717618AC200B1B683 /* DataBase.m */,
+				48357E211846ED2A00BCF799 /* EnvironmentAdviceDataBase.h */,
+				48357E221846ED2A00BCF799 /* EnvironmentAdviceDataBase.m */,
 			);
 			name = LocalData;
 			sourceTree = "<group>";
@@ -1413,6 +1429,8 @@
 				CE1D69C71772958900561EBF /* AdviseScrollview.m */,
 				CE0168A9174B506900462363 /* SuggestView.h */,
 				CE0168AA174B506900462363 /* SuggestView.m */,
+				48357E2418472BB500BCF799 /* AdviseLevel.h */,
+				48357E2518472BB500BCF799 /* AdviseLevel.m */,
 			);
 			name = RunTimeSuggestion;
 			sourceTree = "<group>";
@@ -2454,7 +2472,7 @@
 			attributes = {
 				CLASSPREFIX = default;
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "奥芬多";
+				ORGANIZATIONNAME = "爱摩科技有限公司";
 				TargetAttributes = {
 					7215971B17453680006FD415 = {
 						DevelopmentTeam = D6MQ5ZWZVN;
@@ -2677,6 +2695,7 @@
 				CE38274D174E0A2F009AD8DA /* icon_sleep.png in Resources */,
 				CE38274E174E0A2F009AD8DA /* icon_sleep@2x.png in Resources */,
 				CE38274F174E0A2F009AD8DA /* photo.png in Resources */,
+				48357E2B18473EC400BCF799 /* WeatherAdviseViewController.xib in Resources */,
 				CE382750174E0A2F009AD8DA /* photo@2x.png in Resources */,
 				CE382751174E0A2F009AD8DA /* photo_shadow.png in Resources */,
 				CE382752174E0A2F009AD8DA /* photo_shadow@2x.png in Resources */,
@@ -2936,8 +2955,10 @@
 				CE638AB4174F4899009A60AB /* FMDatabaseAdditions.m in Sources */,
 				485749A4183205A3000D921B /* NotifyItem.m in Sources */,
 				489AABF1180D2D1100EB607E /* ChineseToPinyin.m in Sources */,
+				48357E2A18473EC400BCF799 /* WeatherAdviseViewController.m in Sources */,
 				CE638AB5174F4899009A60AB /* FMDatabasePool.m in Sources */,
 				CE638AB6174F4899009A60AB /* FMDatabaseQueue.m in Sources */,
+				48357E231846ED2A00BCF799 /* EnvironmentAdviceDataBase.m in Sources */,
 				CE638AB7174F4899009A60AB /* FMResultSet.m in Sources */,
 				CE638B51174F5FCE009A60AB /* QuadCurveMenu.m in Sources */,
 				CE638B52174F5FCE009A60AB /* QuadCurveMenuItem.m in Sources */,
@@ -2948,6 +2969,7 @@
 				4855BC9E182CCCB900F02A3E /* MMProgressHUD+Animations.m in Sources */,
 				4855BD011830C8C000F02A3E /* InformationCenterViewController.m in Sources */,
 				CE075A431750824100C57E27 /* save_bathview.m in Sources */,
+				48357E2618472BB500BCF799 /* AdviseLevel.m in Sources */,
 				4855BCA3182CCCB900F02A3E /* MMProgressHUDWindow.m in Sources */,
 				CEF1F4971754AEAC005B3ECD /* ActivityItem.m in Sources */,
 				CEDBEAB41755DD660006828A /* Weather.m in Sources */,
@@ -3074,8 +3096,8 @@
 		7215974117453680006FD415 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3106,8 +3128,8 @@
 					"-Objc",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "7D99526B-E829-434E-AF3C-997AC6CB0C89";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D99526B-E829-434E-AF3C-997AC6CB0C89";
+				PROVISIONING_PROFILE = "50AA14CB-54AC-44E0-968A-DFE1C2AD8759";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "50AA14CB-54AC-44E0-968A-DFE1C2AD8759";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
@@ -3118,8 +3140,8 @@
 		7215974217453680006FD415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Amoycare Information Technology Co., Ltd (D6MQ5ZWZVN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI TINGBIN (FV378L5RHS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3150,8 +3172,8 @@
 					"-Objc",
 				);
 				PRODUCT_NAME = "Amoy Baby Care";
-				PROVISIONING_PROFILE = "7D99526B-E829-434E-AF3C-997AC6CB0C89";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D99526B-E829-434E-AF3C-997AC6CB0C89";
+				PROVISIONING_PROFILE = "50AA14CB-54AC-44E0-968A-DFE1C2AD8759";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "50AA14CB-54AC-44E0-968A-DFE1C2AD8759";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
