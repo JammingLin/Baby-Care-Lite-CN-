@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@class AdviseData;
+@class AdviseLevel;
 @interface WeatherView : UIView <UITableViewDataSource,UITableViewDelegate>
 {
 
     BOOL isgetted;
     UITableView *table;
+    NSString *tempcontent;
+    int       templevel;
+    AdviseData  *mAd;
+    AdviseLevel *mAl;
 }
 +(id)weatherview;
 @property(nonatomic,strong)NSMutableArray  *dataarray;

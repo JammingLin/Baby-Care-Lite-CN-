@@ -37,6 +37,9 @@
 #import "RNGridMenu.h"
 #import "MobClick.h"
 #import "MBProgressHUD.h"
+#import "AdviseData.h"
+#import "AdviseLevel.h"
+#import "EnvironmentAdviceDataBase.h"
 
 #define PHOTOPATH ([NSString stringWithFormat:@"%@/Documents/baby.png",NSHomeDirectory()])
 #define SHAREPATH ([NSString stringWithFormat:@"%@/Documents/share.png",NSHomeDirectory()])
@@ -48,6 +51,13 @@
 #define ADVISE_TYPE_FEED   4
 #define ADVISE_TYPE_BATH   5
 #define ADVISE_TYPE_ALL    6
+
+#define ADVISE_TYPE_TEMP    11
+#define ADVISE_TYPE_HUMI    12
+#define ADVISE_TYPE_LIGHT   13
+#define ADVISE_TYPE_NOICE   14
+#define ADVISE_TYPE_UV      15
+#define ADVISE_TYPE_PM25    16
 
 /**
  *	QuadCurveMenu
